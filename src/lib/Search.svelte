@@ -3,7 +3,6 @@
 	import { type Position } from './types';
 	let address = '';
 	let available_time_minutes = 60;
-	let desiredChargePercentage = '';
 	let currentLocation = '';
 	let current_location_available = true;
 	let desired_charge = 80;
@@ -17,7 +16,7 @@
 				(got_position) => {
 					console.log('got position');
 					const { latitude, longitude } = got_position.coords;
-					position = { lat: latitude, lon: longitude };
+					position = { lat: latitude + Math.random(), lon: longitude };
 					currentLocation = `${latitude}, ${longitude}`;
 					address = currentLocation;
 				},
@@ -32,17 +31,9 @@
 			current_location_available = false;
 		}
 	}
-
-	function handleSubmit() {
-		// Handle form submission here
-		console.log({ address, availableTime: available_time_minutes, desiredChargePercentage });
-	}
 </script>
 
-<form
-	class="w-full bg-base-200 form-control p-2 gap-2 rounded-b-2xl"
-	on:submit|preventDefault={handleSubmit}
->
+<form class="w-full bg-base-200 form-control p-2 gap-2 rounded-b-2xl">
 	<div class="flex gap-2">
 		<input
 			type="text"

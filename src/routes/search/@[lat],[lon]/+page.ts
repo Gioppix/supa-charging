@@ -1,15 +1,11 @@
+import { get_charging_stations } from '$lib/api';
 import type { Position, SearchResult } from '$lib/types';
 import type { PageLoad } from './$types';
 
-export const load: PageLoad = ({ params }) => {
-	const position: Position = {
-		lat: parseFloat(params.lat),
-		lon: parseFloat(params.lon)
-	};
+async function load_data() {
+	await new Promise((resolve) => setTimeout(resolve, 2000));
+	await get_charging_stations();
 
-	if (isNaN(position.lat) || isNaN(position.lon)) {
-		throw new Error('Invalid latitude or longitude');
-	}
 	let results: SearchResult[] = [
 		{
 			cost_cents_per_kwh: 100,
@@ -40,5 +36,24 @@ export const load: PageLoad = ({ params }) => {
 		}
 	];
 	results = [...results, ...results, ...results, ...results, ...results];
-	return { results };
+	return results;
+}
+
+export const load: PageLoad = async ({ params }) => {
+	const position: Position = {
+		lat: parseFloat(params.lat),
+		lon: parseFloat(params.lon)
+	};
+
+	if (isNaN(position.lat) || isNaN(position.lon)) {
+		throw new Error('Invalid latitude or longitude');
+	}
+
+	async function load_data() {
+		const results = await get_charging_stations(position.lat, position.lon, 10000);
+		console.log(results);
+		return results ?? [];
+	}
+
+	return { results: load_data() };
 };
