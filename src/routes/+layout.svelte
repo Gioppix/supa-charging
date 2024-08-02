@@ -1,11 +1,9 @@
 <script>
-	import Header from './Header.svelte';
 	import '../app.css';
+	import 'tailwindcss/tailwind.css';
 </script>
 
 <div class="app">
-	<Header />
-
 	<main>
 		<slot />
 	</main>
