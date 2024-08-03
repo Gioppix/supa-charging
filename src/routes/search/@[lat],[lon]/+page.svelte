@@ -1,7 +1,7 @@
 <script lang="ts">
 	import 'leaflet/dist/leaflet.css';
 	import 'leaflet/dist/leaflet.css';
-	import { afterUpdate, onMount } from 'svelte';
+	import { afterUpdate, onDestroy, onMount } from 'svelte';
 	import type { DivIcon, Map as LeafletMap } from 'leaflet';
 	import Charger from './Charger.svelte';
 
@@ -18,6 +18,11 @@
 	}
 
 	onMount(async () => {});
+	onDestroy(() => {
+		if (map) {
+			map.remove();
+		}
+	});
 	async function mount_map() {
 		console.log('mounting');
 		const results = await data.results_promise;
@@ -36,7 +41,7 @@
 		results.forEach((r) => {
 			const domelement = document.getElementById(JSON.stringify(r));
 			if (!domelement) return;
-			const marker = L.marker([r.position.lat, r.position.lon])
+			const marker = L.marker([r.coords.lat, r.coords.lon])
 				.addTo(map)
 				.bindPopup(domelement, {
 					className: 'custom-popup',
@@ -48,25 +53,25 @@
 				.setIcon(createIcon('black'));
 			if (r.best_cost) {
 				marker.setIcon(createIcon('var(--fallback-a,oklch(var(--a)/var(--tw-bg-opacity)))'));
-			} else if (r.best_time) {
+			} else if (r.best_time_recharging) {
 				marker.setIcon(createIcon('var(--fallback-s,oklch(var(--p)/var(--tw-bg-opacity)))'));
 			} else if (r.best_rating) {
 				marker.setIcon(createIcon('var(--fallback-s,oklch(var(--s)/var(--tw-bg-opacity)))'));
 			}
-			bounds.extend([r.position.lat, r.position.lon]);
+			bounds.extend([r.coords.lat, r.coords.lon]);
 		});
 		map.fitBounds(bounds);
 	}
 
 	afterUpdate(() => {
 		if (list) {
-			map.remove();
+			map?.remove();
 		} else {
 			mount_map();
 		}
 	});
 
-	let list = false;
+	let list = true;
 </script>
 
 <div class="flex flex-col p-2 h-full w-full bg-base-200 rounded-t-xl">

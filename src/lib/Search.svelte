@@ -1,7 +1,6 @@
 <script lang="ts">
 	import Icon from '@iconify/svelte';
 	import { type Position } from './types';
-	import { GOOLE_MAPS_API_KEY } from './api';
 	import { onMount } from 'svelte';
 
 	let available_time_minutes = 60;
@@ -66,11 +65,6 @@
 	}
 </script>
 
-<svelte:head>
-	<script
-		src={`https://maps.googleapis.com/maps/api/js?key=${GOOLE_MAPS_API_KEY}&libraries=places&loading=async`}
-	></script>
-</svelte:head>
 <form class="w-full bg-base-200 form-control p-2 gap-2 rounded-b-2xl">
 	<div class="flex gap-2">
 		<input
@@ -135,7 +129,7 @@
 		</div>
 
 		<a
-			href={`/search/@${selected_location?.lat},${selected_location?.lon}`}
+			href={`/search/@${selected_location?.lat},${selected_location?.lon}?available_time_minutes=${available_time_minutes}&desired_charge=${desired_charge}`}
 			type="submit"
 			class={'btn btn-primary btn-sm flex-grow ' + (selected_location ? '' : 'btn-disabled')}
 		>

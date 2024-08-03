@@ -1,17 +1,9 @@
 <script lang="ts">
 	import { get } from 'svelte/store';
-	import { battery_size, compatible_chargers } from './storage';
+	import { battery_size, compatible_chargers, range } from './storage';
+	import { ALL_TYPES } from './types';
 
 	let inputValue: number | null = get(battery_size);
-	const ALL_TYPES = [
-		'Type2 - 400Vac',
-		'CCS',
-		'Type2 - 230Vac',
-		'700 bar small vehicles',
-		'CHAdeMO',
-		'Type2Mennekes',
-		'Type 3A'
-	];
 
 	function reset() {
 		inputValue = null;
@@ -40,6 +32,14 @@
 			/>
 			<button class="btn btn-outline btn-sm" on:click={reset}>Reset</button>
 			<button class="btn btn-primary btn-sm" on:click={update}>Update</button>
+		</div>
+	</div>
+	<div>
+		<label class="label" for="range">
+			<span class="label-text"> Current Range (km): {$range} </span>
+		</label>
+		<div class="input-group flex gap-2">
+			<input type="range" min="0" max="200" class="range" bind:value={$range} />
 		</div>
 	</div>
 	<div>

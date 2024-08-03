@@ -3,15 +3,12 @@ export interface Position {
 	lon: number;
 }
 
-export interface SearchResult {
-	position: Position;
-	id: string;
-	speed_kw: number;
-	cost_cents_per_kwh: number;
-	address: string;
-	time_to_reach_minutes: number | null;
-	best_cost: boolean;
-	best_time: boolean;
-	best_rating: boolean;
-	rating: number | null;
-}
+export const ALL_TYPES = [
+	'Type2 - 400Vac',
+	'CCS',
+	'Type2 - 230Vac',
+	'700 bar small vehicles',
+	'CHAdeMO',
+	'Type2Mennekes',
+	'Type 3A'
+];
