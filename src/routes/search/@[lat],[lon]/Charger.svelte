@@ -13,12 +13,25 @@
 					{result.address}
 				</h2>
 			</div>
-			<div class="flex flex-wrap gap-2">
+			{#if result.rating}
+				<IconText icon="star-outline-rounded" text={result.rating.toString()} />
+			{/if}
+			<div class="flex flex-wrap gap-3">
 				<IconText icon="wallet" text={result.cost_cents_per_kwh.toFixed(3) + ' €'} />
-				<IconText icon="bolt-rounded" text={Math.floor(result.speed_watts / 1000) + ' kWh'} />
+				<IconText icon="bolt-rounded" text={Math.floor(result.speed_kw) + ' kWh'} />
 				<IconText icon="timer-outline-rounded" text="1:30 h" />
 			</div>
-			<span class="badge">Badge</span>
+			<div class="flex gap-2">
+				{#if result.best_cost}
+					<span class="badge badge-accent"> Cheapest </span>
+				{/if}
+				{#if result.best_time}
+					<span class="badge badge-primary"> Fastest </span>
+				{/if}
+				{#if result.best_rating}
+					<span class="badge badge-secondary"> Nicest </span>
+				{/if}
+			</div>
 
 			<!-- <Icon icon="mdi-light:home" /> -->
 		</div>
@@ -30,7 +43,9 @@
 			>
 				<Icon icon="material-symbols:directions" height="1.5rem" />
 			</a>
-			<p class="whitespace-nowrap min-w-max">{result.time_to_reach_minutes + ' min'}</p>
+			{#if result.time_to_reach_minutes}
+				<p class="whitespace-nowrap min-w-max">{result.time_to_reach_minutes + ' min'}</p>
+			{/if}
 		</div>
 	</div>
 </div>
