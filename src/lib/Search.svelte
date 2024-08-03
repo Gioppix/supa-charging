@@ -93,7 +93,7 @@
 	</div>
 
 	<div class="flex gap-2 items-center">
-		<p class="label-text min-w-max">Charge amount:</p>
+		<p class="label-text min-w-max font-bold">Charge amount:</p>
 		<input
 			type="range"
 			min="0"
@@ -104,7 +104,7 @@
 		<p class="label-text-alt">{desired_charge}%</p>
 	</div>
 
-	<div class="flex gap-2">
+	<div class="flex gap-2 flex-col">
 		<div class="flex gap-2">
 			<button
 				type="button"
@@ -113,7 +113,9 @@
 			>
 				-
 			</button>
-			<div class="input input-sm input-bordered flex-grow flex items-center justify-center w-20">
+			<div
+				class=" font-bold input input-sm input-bordered flex-grow flex items-center justify-center w-20"
+			>
 				{Math.floor(available_time_minutes / 60)}:{String(available_time_minutes % 60).padStart(
 					2,
 					'0'
@@ -131,7 +133,8 @@
 		<a
 			href={`/search/@${selected_location?.lat},${selected_location?.lon}?available_time_minutes=${available_time_minutes}&desired_charge=${desired_charge}`}
 			type="submit"
-			class={'btn btn-primary btn-sm flex-grow ' + (selected_location ? '' : 'btn-disabled')}
+			class={'mt-3 font-bold btn btn-primary btn-sm flex-grow ' +
+				(selected_location ? '' : 'btn-disabled')}
 		>
 			Cerca
 		</a>
