@@ -70,10 +70,10 @@
 				alt="street-view-img"
 				src={`https://maps.googleapis.com/maps/api/streetview?size=600x300&location=${result.coords.lat},${result.coords.lon}&key=AIzaSyCszTXCRzVkOftnnG4WJGJoKihWEK56_k4`}
 			/>
-			<div class="flex gap-3">
+			<!-- <div class="flex gap-3">
 				<button class="btn flex-grow min-w-0 btn-sm btn-error"> Already Occupied </button>
 				<button class="btn flex-grow min-w-0 btn-sm btn-success"> Charghing here </button>
-			</div>
+			</div> -->
 		</div>
 	{/if}
 </div>

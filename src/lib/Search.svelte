@@ -73,14 +73,14 @@
 			placeholder="Inserisci l'indirizzo"
 			bind:value={address_input}
 			disabled={using_current_location}
-			class="input input-bordered input-sm w-full"
+			class="input input-bordered input-md w-full"
 		/>
-		<button type="button" class="btn btn-primary btn-sm btn-square" on:click={reset}>
+		<button type="button" class="btn btn-primary btn-mdm btn-square" on:click={reset}>
 			<Icon icon="material-symbols:close-rounded" height="1.2rem" />
 		</button>
 		<button
 			type="button"
-			class="btn btn-primary btn-sm btn-square"
+			class="btn btn-primary btn-md btn-square"
 			on:click={getCurrentLocation}
 			disabled={!current_location_available}
 		>
