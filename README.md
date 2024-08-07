@@ -28,7 +28,6 @@ Our solution stood out for its smooth user experience, featuring intuitive list 
 
 ## Links
 
--
 - [Hackathon Project Page](https://hackathon.bz.it/project/supa-charging)
 - [Presentation Video](https://vimeo.com/995136097)
 
